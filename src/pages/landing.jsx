@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Images } from "../constant";
 import Navbar from '../components/navbar';
@@ -6,8 +6,44 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 import { Helmet } from "react-helmet";
 import { Hash } from 'lucide-react';
 import Footer from '../components/footer';
+import { LiaWhatsapp } from 'react-icons/lia';
+import { useCart } from '../contexts/CartContext';
+
 
 const Landing = () => {
+
+    const [openIndex, setOpenIndex] = useState(null);
+      
+     const { cartItems, removeFromCart, updateQuantity } = useCart();
+       const [showContactForm, setShowContactForm] = useState(false);
+       const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+     
+       const handleWhatsAppClick = () => {
+         const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
+         window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
+       };
+
+       const [isMobile, setIsMobile] = useState(false);
+
+  // Set isMobile based on screen width
+  const checkMobile = () => {
+    if (window.innerWidth <= 768) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  };
+
+  // Call checkMobile on window resize
+  useEffect(() => {
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+
+
+
     const keywords = [
         "Designer toys", "Collectible figures", "Limited edition toys", "Art toys", "Vinyl figures",
         "KAWS collectible", "KAWS Companion", "KAWS figure", "KAWS statue", "KAWS art toy",
@@ -43,6 +79,69 @@ const Landing = () => {
                 <link rel="icon" type="image/png" href={Images.logo} sizes="280x280" />
             </Helmet>
 
+             {/* WhatsApp Button */}
+                  <div className="fixed bottom-8 right-8 z-50 flex flex-col items-end">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{
+                        opacity: [0, 1, 1, 0],
+                        y: [10, 0, 0, 10]
+                      }}
+                      transition={{
+                        duration: 3,
+                        times: [0, 0.1, 0.9, 1],
+                        repeat: Infinity,
+                        repeatDelay: 5
+                      }}
+                      className="mb-2 bg-black text-white px-4 py-2 rounded-lg text-sm shadow-lg"
+                    >
+                      Need help? Chat with us!
+                    </motion.div>
+            
+                    <motion.button
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ 
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                        delay: 1 
+                      }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        boxShadow: "0 0 25px rgba(255, 194, 60, 0.5)"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleWhatsAppClick}
+                      className="bg-purple-400 text-black p-4 rounded-full shadow-lg flex items-center justify-center group"
+                    >
+                      <motion.div
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          rotate: [0, 10, -10, 0]
+                        }}
+                        transition={{ 
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatDelay: 3
+                        }}
+                      >
+                        <LiaWhatsapp size={24} />
+                      </motion.div>
+                      <motion.span
+                        initial={{ width: 0, opacity: 0 }}
+                        whileHover={{ 
+                          width: "auto",
+                          opacity: 1,
+                          marginLeft: "8px"
+                        }}
+                        className="overflow-hidden whitespace-nowrap font-semibold"
+                      >
+                        Chat with us
+                      </motion.span>
+                    </motion.button>
+                  </div>
+
             <div className='relative'>
                 <div className='bg-[#000] relative'>   
                     <Navbar />
@@ -51,7 +150,7 @@ const Landing = () => {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="absolute bottom-40 ms-96 text-white text-lg"
+                        className="absolute bottom-40 ms-96 text-white text-lg md:block hidden"
                     >
                         <p>Explore a stylish selection of Bearbrick collectibles, from fashion collabs to <br /> limited-edition art pieces. Find your next statement piece today</p>
 
@@ -59,23 +158,23 @@ const Landing = () => {
                             className='flex space-x-1 items-center mt-5'
                             whileHover={{ scale: 1.05 }}
                         >
-                            <button className='ms-8 bg-white px-4 py-2 rounded-full hover:bg-zinc-800 text-zinc-900 transition duration-500 hover:text-white'>
+                            <button className='ms-8 bg-transparent border-zinc-100 border px-4 py-2 rounded-full hover:text-zinc-950 hover:bg-white text-zinc-100 transition duration-500 '>
                                 Shop Now
                             </button> 
-                            <button className='bg-white px-2 py-2 hover:bg-zinc-800 transition duration-500 hover:text-white rounded-full text-zinc-900 text-2xl'>
+                            <button className='border border-zinc-100 px-2 py-2  transition duration-500  rounded-full text-zinc-100 text-2xl'>
                                 <IoIosArrowRoundForward />
                             </button>
                         </motion.div>
                     </motion.div>
 
                     <motion.img 
-                        initial={{ scale: 1.1 }}
-                        animate={{ scale: 1 }}
-                        transition={{ duration: 1.2 }}
-                        src={Images.lnding1} 
-                        alt="" 
-                        className='object-cover h-[100vh]'
-                    />
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.2 }}
+          src={isMobile ? Images.lnding2 : Images.lnding1} 
+          alt="Hero image" 
+          className="object-cover h-[100vh]"
+        />
                 </div>
 
                 <motion.section 
@@ -88,9 +187,9 @@ const Landing = () => {
                         initial={{ y: 100 }}
                         whileInView={{ y: 0 }}
                         transition={{ duration: 0.8 }}
-                        src={Images.section2} 
+                        src={isMobile ? Images.mobile2 : Images.section2}
                         alt="" 
-                        className='h-[110vh] w-full'
+                        className='h-[110vh]  w-full'
                     />
                      
                     <div className='pt-12 text-zinc-100 bg-gradient-to-r from-black via-[#280239] to-black'> 
@@ -106,7 +205,7 @@ const Landing = () => {
                             </motion.div>
                             <motion.div 
                                 variants={fadeInUp}
-                                className='me-20 mt-20'
+                                className='md:me-20 me-6 mt-20'
                             >
                                 <button className='text-lg font-bold'>S<span className='border-b-2 border-white/50'>HOP NO</span>W</button>
                             </motion.div>
@@ -118,9 +217,9 @@ const Landing = () => {
                             transition={{ duration: 0.8 }}
                             className='flex float-end me-5 mt-6'
                         >
-                            <motion.img whileHover={{ scale: 1.05 }} src={Images.b1} className='h-[75vh]' alt="" />
-                            <motion.img whileHover={{ scale: 1.05 }} src={Images.b2} className='h-[75vh]' alt="" />
-                            <motion.img whileHover={{ scale: 1.05 }} src={Images.b3} className='h-[75vh]' alt="" />
+                            <motion.img whileHover={{ scale: 1.05 }} src={Images.b1} className='md:h-[75vh] h-[65vh]' alt="" />
+                            <motion.img whileHover={{ scale: 1.05 }} src={Images.b2} className='md:h-[75vh] h-[65vh]' alt="" />
+                            <motion.img whileHover={{ scale: 1.05 }} src={Images.b3} className='md:h-[75vh] h-[65vh]' alt="" />
                         </motion.div> 
                          
                         <div className="animate-scroll inline-flex pb-10 gap-4 whitespace-nowrap pt-16">

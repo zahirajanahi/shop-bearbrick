@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, Plus } from 'lucide-react';
 import ProductDetailModal from './ProductDetailModal';
+
 const ProductCard = ({ product, onAddToCart }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     show: { 
@@ -14,69 +16,84 @@ const ProductCard = ({ product, onAddToCart }) => {
       }
     }
   };
+
   return (
     <>
       <motion.div
         variants={cardVariants}
+        initial="hidden"
+        animate="show"
         whileHover="hover"
-        className="bg-zinc-800 rounded-xl overflow-hidden shadow-lg group relative"
+        className="group relative bg-white/5 md:ms-0 ms-16 rounded-lg overflow-hidden border border-zinc-800 shadow-sm hover:shadow-md transition-all duration-300 w-full mb-6"
       >
-        <div className="relative overflow-hidden">
+        <div className="relative aspect-square  overflow-hidden bg-gray-50">
           <motion.img
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.7 }}
             src={product.image_url}
-            alt={product.name}
-            className="w-full h-64 object-cover"
+            alt={product.name || product.title}
+            className="w-full h-full object-cover"
           />
-          {/* Button for larger screens (visible on hover) */}
+          
+          {/* Gradient overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Hidden on mobile, visible on desktop hover */}
           <motion.div
             initial={{ opacity: 0 }}
             whileHover={{ opacity: 1 }}
             className="absolute inset-0 bg-black bg-opacity-40 lg:flex items-center justify-center hidden"
           >
             <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => onAddToCart(product)}
-              className="bg-[#FFC23C] text-black px-6 py-3 rounded-full font-semibold flex items-center gap-2"
+              className="bg-white text-gray-950 px-6 py-3 rounded-full font-medium flex items-center gap-2 shadow-lg backdrop-blur-sm bg-opacity-90 hover:bg-opacity-100"
             >
-              <ShoppingCart size={20} />
+              <ShoppingCart size={18} />
               Add to Cart
             </motion.button>
           </motion.div>
         </div>
-        {/* Always visible button on mobile */}
-        <div className="p-6">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <h3 className="text-xl font-semibold text-white mb-2">{product.title}</h3>
-            <p className="text-gray-400 text-[15px] mb-4">{product.description}</p>
-            <div className="flex items-center justify-between">
-              <span className="text-xl font-bold text-[#FFC23C]">
-                {product.price} MAD
-              </span>
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="text-sm text-gray-400 hover:text-white transition-colors"
-              >
-                Product Details
-              </button>
+        
+        <div className="p-4">
+          <div className="mb-3 space-y-1">
+            <h3 className="font-medium text-gray-100 line-clamp-1 text-sm sm:text-base">
+              {product.title}
+            </h3>
+            <p className="text-xs text-gray-300 line-clamp-2">
+              {product.description}
+            </p>
+          </div>
+          
+          <div className="flex items-center justify-between">
+            <div className="flex items-baseline gap-1">
+              <p className="text-lg font-semibold text-gray-200">
+                {product.price}
+              </p>
+              <span className="text-sm text-purple-300 font-medium">MAD</span>
             </div>
-          </motion.div>
-          {/* Mobile Add to Cart Button (always visible) */}
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="text-sm text-gray-400 hover:text-purple-300 transition-colors flex items-center gap-1"
+              aria-label="View details"
+            >
+              <Plus size={16} className="text-purple-300" />
+              Details
+            </button>
+          </div>
+          
+          {/* Mobile-only Add to Cart button */}
           <button
             onClick={() => onAddToCart(product)}
-            className="lg:hidden mt-4 w-full bg-[#FFC23C] text-black px-6 py-3 rounded-full font-semibold flex items-center justify-center gap-2"
+            className="lg:hidden mt-4 w-full bg-white text-gray-950 py-2 rounded-full font-medium flex items-center justify-center gap-2 transition-colors"
           >
-            <ShoppingCart size={20} />
+            <ShoppingCart size={18} />
             Add to Cart
           </button>
         </div>
       </motion.div>
+      
       <ProductDetailModal
         product={product}
         isOpen={isModalOpen}
@@ -86,4 +103,21 @@ const ProductCard = ({ product, onAddToCart }) => {
     </>
   );
 };
+
+// Container component for vertical stacking
+const ProductList = ({ products, onAddToCart }) => {
+  return (
+    <div className="grid grid-cols-1 gap-6 max-w-md mx-auto w-full">
+      {products.map(product => (
+        <ProductCard 
+          key={product.id} 
+          product={product} 
+          onAddToCart={onAddToCart} 
+        />
+      ))}
+    </div>
+  );
+};
+
 export default ProductCard;
+export { ProductList };

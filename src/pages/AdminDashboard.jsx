@@ -32,7 +32,7 @@ export default function AdminDashboard() {
       product.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredProducts(filtered);
-    setCurrentPage(1); 
+    setCurrentPage(1); // Reset to first page when search changes
   }, [searchQuery, products]);
   const fetchProducts = async () => {
     try {

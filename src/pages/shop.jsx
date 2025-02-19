@@ -4,13 +4,14 @@ import { supabase } from '../lib/supabase';
 import ProductCard from '../components/ProductCard';
 import Navbar from '../components/navbar';
 import { useCart } from '../contexts/CartContext';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Footer from '../components/footer';
-import { MessageCircle, Search, SlidersHorizontal, X } from 'lucide-react';
-import { Images } from "../constant";
+import { Search, SlidersHorizontal, X } from 'lucide-react';
 import { LiaWhatsapp } from "react-icons/lia";
-import CustomCursor from '../components/CustomCursor';
 import Swal from 'sweetalert2';
+import { Images } from "../constant";
+
+
 
 export const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -22,33 +23,45 @@ export const Shop = () => {
     category: 'all',
     sortBy: 'newest'
   });
+    
+     const [showContactForm, setShowContactForm] = useState(false);
+     const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+   
+     const handleWhatsAppClick = () => {
+       const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
+       window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
+     };
+   
+  
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     fetchProducts();
   }, []);
-
   const handleAddToCart = (product) => {
     addToCart(product);
-    Swal.fire({
-      title: "Added to Cart!",
-      text: `${product.title} has been added to your cart`,
-      icon: "success",
-      showConfirmButton: false,
-      timer: 2000,
-      toast: true,
-      position: "top-end",
-      background: "#1a1a1a",
-      color: "#fff",
-      iconColor: "#8B5CF6",
-      customClass: {
-        popup: "modern-swal-popup",
-        title: "modern-swal-title",
-        content: "modern-swal-content"
-      }
-    });
-  };
 
+    // Show SweetAlert notification with a new style
+Swal.fire({
+  title: "Successfully Added!",
+  text: "The product is now in your cart.",
+  icon: "success",
+  showConfirmButton: false,
+  timer: 2500,
+  toast: true,
+  position: "top-right",
+  background: "#2c3e50", 
+  color: "#ecf0f1", 
+  iconColor: "#c084fc", 
+  customClass: {
+    popup: "custom-swal-popup",
+    title: "custom-swal-title",
+    content: "custom-swal-content"
+  }
+
+    });
+
+    
+  };
   const fetchProducts = async () => {
     setIsLoading(true);
     try {
@@ -56,7 +69,6 @@ export const Shop = () => {
         .from('products')
         .select('*')
         .order('created_at', { ascending: false });
-
       if (error) throw error;
       setProducts(data);
     } catch (error) {
@@ -66,17 +78,12 @@ export const Shop = () => {
     }
   };
 
-  const handleWhatsAppClick = () => {
-    window.open('https://wa.me/0661715003', '_blank');
-  };
-
   const handleFilterChange = (title, value) => {
     setFilters(prev => ({
       ...prev,
       [title]: value
     }));
   };
-
   const resetFilters = () => {
     setFilters({
       priceRange: 'all',
@@ -85,12 +92,10 @@ export const Shop = () => {
     });
     setSearchTerm('');
   };
-
   const filteredProducts = products.filter(product => {
     const matchesSearch = !searchTerm || 
       product.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.description?.toLowerCase().includes(searchTerm.toLowerCase());
-
     let matchesPrice = true;
     if (filters.priceRange === 'under100') {
       matchesPrice = product.price < 100;
@@ -99,9 +104,7 @@ export const Shop = () => {
     } else if (filters.priceRange === 'over500') {
       matchesPrice = product.price > 500;
     }
-
     const matchesCategory = filters.category === 'all' || product.category === filters.category;
-
     return matchesSearch && matchesPrice && matchesCategory;
   }).sort((a, b) => {
     if (filters.sortBy === 'priceAsc') {
@@ -112,240 +115,202 @@ export const Shop = () => {
       return new Date(b.created_at) - new Date(a.created_at);
     }
   });
-
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-black">
       <Toaster position="top-right" />
       <Navbar cartItems={cartItems} />
+
+       {/* WhatsApp Button */}
+            <div className="fixed bottom-8 right-8 z-50 flex flex-col items-end">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{
+                  opacity: [0, 1, 1, 0],
+                  y: [10, 0, 0, 10]
+                }}
+                transition={{
+                  duration: 3,
+                  times: [0, 0.1, 0.9, 1],
+                  repeat: Infinity,
+                  repeatDelay: 5
+                }}
+                className="mb-2 bg-black text-white px-4 py-2 rounded-lg text-sm shadow-lg"
+              >
+                Need help? Chat with us!
+              </motion.div>
       
-      {/* Hero Section with Parallax Effect */}
-      <motion.div 
-        className="relative h-[70vh] overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-black/80"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        />
-        <motion.img 
-          src={Images.shophero}
-          alt="Collection Banner"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          initial={{ scale: 1.2, y: 0 }}
-          animate={{ scale: 1, y: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white z-10">
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  delay: 1 
+                }}
+                whileHover={{ 
+                  scale: 1.1,
+                  boxShadow: "0 0 25px rgba(255, 194, 60, 0.5)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleWhatsAppClick}
+                className="bg-purple-400 text-black p-4 rounded-full shadow-lg flex items-center justify-center group"
+              >
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    rotate: [0, 10, -10, 0]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 3
+                  }}
+                >
+                  <LiaWhatsapp size={24} />
+                </motion.div>
+                <motion.span
+                  initial={{ width: 0, opacity: 0 }}
+                  whileHover={{ 
+                    width: "auto",
+                    opacity: 1,
+                    marginLeft: "8px"
+                  }}
+                  className="overflow-hidden whitespace-nowrap font-semibold"
+                >
+                  Chat with us
+                </motion.span>
+              </motion.button>
+            </div>
+      
+      {/* Hero Section */}
+      <div className="relative h-[80vh] bg-black overflow-hidden">
+        <div className="absolute inset-0 ">
+          <img 
+            src={Images.shop}
+            alt="Collection Banner"
+            className="w-full h-[70vh] object-cover "
+          />
+        </div>
+        
+        <div className="relative h-full max-w-7xl  px-4 flex flex-col mt-24 ms-10">
           <motion.h1 
-            className="text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-6xl font-bold text-gray-100 mb-6"
           >
-            Exclusive Collection
+            Discover <span className='text-[#754b9f]'> Our</span> <br /> Collection
           </motion.h1>
           <motion.p 
-            className="text-xl text-gray-300 max-w-2xl text-center"
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-lg text-gray-400 max-w-2xl"
           >
-            Discover our curated selection of premium collectibles
+            Explore our carefully curated selection of premium products
           </motion.p>
+          <div className="relative flex-1 min-w-[300px] mt-6">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="md:w-[30vw] w-[50vw] pl-10 pr-4 py-3 bg-transparent rounded-3xl border border-zinc-800 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all shadow-sm"
+              />
+              <Search className="absolute left-3 top-3.5 text-gray-400" size={20} />
+            </div>
+            
         </div>
-      </motion.div>
-
-      <main className="max-w-7xl mx-auto px-4 py-12">
-        {/* Search and Filter Bar */}
-        <motion.div 
-          className="mb-8 flex flex-wrap gap-4 items-center justify-between"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.7 }}
-        >
-          <div className="relative flex-1 min-w-[300px]">
-            <input
-              type="text"
-              placeholder="Search your favorite pieces..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-3 pl-12 bg-gray-900/50 text-white rounded-xl border border-purple-500/20 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
-            />
-            <Search className="absolute left-4 top-3.5 text-purple-400" size={20} />
-          </div>
-          
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="px-6 py-3 bg-purple-600 text-white rounded-xl flex items-center gap-2 hover:bg-purple-700 transition-colors duration-300"
+      </div>
+       {/* Filters */}
+       <div className="mb-6">
+  <div className="flex float-end mb-5 me-10">
+    <button
+      onClick={() => setIsFilterOpen(!isFilterOpen)}
+      className="px-6 py-3 text-gray-300 bg-zinc-900 rounded-3xl border border-zinc-700 flex items-center gap-2 hover:bg-zinc-800 transition-colors shadow-md"
+    >
+      <SlidersHorizontal size={20} />
+      Filters
+    </button>
+  </div>
+  {/* Filter Panel */}
+  {isFilterOpen && (
+    <div className="p-7 me-10 ms-10 bg-zinc-900 rounded-lg border border-gray-700 shadow-md">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Price Range Filter */}
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">Price Range</label>
+          <select
+            value={filters.priceRange}
+            onChange={(e) => handleFilterChange('priceRange', e.target.value)}
+            className="w-full p-2 border bg-zinc-800 text-gray-200 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
-            <SlidersHorizontal size={20} />
-            Filters
-          </motion.button>
-        </motion.div>
+            <option value="all">All Prices</option>
+            <option value="under100">Under $100</option>
+            <option value="100to500">$100 - $500</option>
+            <option value="over500">Over $500</option>
+          </select>
+        </div>
+        {/* Sort By Filter */}
+        <div>
+          <label className="block text-sm font-medium text-gray-300 mb-2">Sort By</label>
+          <select
+            value={filters.sortBy}
+            onChange={(e) => handleFilterChange('sortBy', e.target.value)}
+            className="w-full p-2 border bg-zinc-800 text-gray-200 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+          >
+            <option value="newest">Newest First</option>
+            <option value="priceAsc">Price: Low to High</option>
+            <option value="priceDesc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+      <button
+        onClick={resetFilters}
+        className="mt-4 px-4 py-2 text-sm text-gray-400 hover:text-gray-200 transition-colors"
+      >
+        Reset Filters
+      </button>
+    </div>
+  )}
+</div>
 
-        {/* Filter Panel */}
-        <AnimatePresence>
-          {isFilterOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="overflow-hidden"
-            >
-              <div className="mb-8 p-6 bg-gray-900/50 backdrop-blur-lg rounded-xl border border-purple-500/20">
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-lg font-semibold text-white">Refine Your Search</h3>
-                  <button
-                    onClick={resetFilters}
-                    className="text-purple-400 hover:text-purple-300 transition-colors duration-300 text-sm flex items-center gap-1"
-                  >
-                    <X size={16} />
-                    Reset All
-                  </button>
-                </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-300">
-                      Price Range
-                    </label>
-                    <select
-                      value={filters.priceRange}
-                      onChange={(e) => handleFilterChange('priceRange', e.target.value)}
-                      className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-purple-500/20 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
-                    >
-                      <option value="all">All Prices</option>
-                      <option value="under100">Under $100</option>
-                      <option value="100to500">$100 - $500</option>
-                      <option value="over500">Over $500</option>
-                    </select>
-                  </div>
 
-                  <div className="space-y-2">
-                    <label className="block text-sm font-medium text-gray-300">
-                      Sort By
-                    </label>
-                    <select
-                      value={filters.sortBy}
-                      onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                      className="w-full bg-gray-800 text-white rounded-lg px-4 py-2.5 border border-purple-500/20 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300"
-                    >
-                      <option value="newest">Newest First</option>
-                      <option value="priceAsc">Price: Low to High</option>
-                      <option value="priceDesc">Price: High to Low</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+      <main className="max-w-7xl mx-auto px-10 mb-28 mt-16">
+
+       
+
 
         {/* Products Grid */}
-        {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="bg-gray-800 rounded-xl h-64 mb-4"></div>
-                <div className="h-4 bg-gray-800 rounded w-3/4 mb-2"></div>
-                <div className="h-4 bg-gray-800 rounded w-1/2"></div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            {filteredProducts.map((product, index) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <ProductCard
-                  product={product}
-                  onAddToCart={handleAddToCart}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
-        )}
-
-        {/* No Results Message */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {filteredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={handleAddToCart}
+            />
+          ))}
+        </div>
+        
+        {/* Empty State */}
         {!isLoading && filteredProducts.length === 0 && (
-          <motion.div 
-            className="text-center py-16"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <p className="text-gray-400 text-lg mb-4">No products found matching your criteria</p>
+          <div className="text-center py-16">
+            <p className="text-gray-500 mb-4">
+              No products found matching your criteria
+            </p>
             <button
               onClick={resetFilters}
-              className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-colors duration-300"
+              className="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors shadow-sm"
             >
               Reset Filters
             </button>
-          </motion.div>
+         =
+          </div>
         )}
       </main>
-
-      {/* WhatsApp Button */}
-      <div className="fixed bottom-8 right-8 z-50 flex flex-col items-end">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ 
-            opacity: [0, 1, 1, 0],
-            y: [10, 0, 0, 10]
-          }}
-          transition={{ 
-            duration: 3,
-            times: [0, 0.1, 0.9, 1],
-            repeat: Infinity,
-            repeatDelay: 5
-          }}
-          className="mb-2 bg-purple-900/90 backdrop-blur-lg text-white px-4 py-2 rounded-xl text-sm shadow-lg"
-        >
-          Need help? Chat with us!
-        </motion.div>
-        
-        <motion.button
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ 
-            type: "spring",
-            stiffness: 260,
-            damping: 20,
-            delay: 1 
-          }}
-          whileHover={{ 
-            scale: 1.1,
-            boxShadow: "0 0 25px rgba(139, 92, 246, 0.5)"
-          }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleWhatsAppClick}
-          className="bg-purple-600 text-white p-4 rounded-full shadow-lg flex items-center gap-2 group hover:bg-purple-700 transition-colors duration-300"
-        >
-          <LiaWhatsapp size={24} />
-          <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out whitespace-nowrap">
-            Chat with us
-          </span>
-        </motion.button>
-      </div>
-
+     
       <Footer />
     </div>
   );
 };
-
 export default Shop;

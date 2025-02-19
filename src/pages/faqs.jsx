@@ -5,6 +5,7 @@ import Footer from '../components/footer';
 import { ChevronDown, ChevronUp, DivideIcon as LucideIcon, ShoppingBag, Truck, MessageCircle, Palette, HelpCircle, Package } from 'lucide-react';
 import { LiaWhatsapp } from "react-icons/lia";
 import CustomCursor from '../components/CustomCursor';
+import { useCart } from '../contexts/CartContext';
 
 
 
@@ -20,28 +21,35 @@ const faqs  = [
     icon: Truck
   },
   {
-    question: "What is the point of KAWS?",
-    answer: "KAWS, a former graffiti artist and skateboarder, represents accessible popular art for everyone. His work primarily draws inspiration from iconic figures in cinema and television, transforming them to reflect on contemporary society. Each piece serves as a commentary on modern culture while maintaining a distinctive artistic style.",
+    question: "What’s the Point of Bearbricks?",
+    answer: "Bearbricks are designer art toys that serve as collectibles rather than functional figures. Their main appeal lies in their artistic collaborations, exclusivity, and cultural significance.",
     icon: Palette
   },
   {
-    question: "Are KAWS figures worth collecting?",
-    answer: "Yes! KAWS figures are highly collectible items that often appreciate in value over time. They represent a unique intersection of street art, pop culture, and contemporary art, making them valuable both as art pieces and investments.",
+    question: "Are Bearbrick Figures Worth Collecting ?",
+    answer: "Yes, Bearbricks are worth collecting if you’re interested in art, design, or investment pieces. Their value depends on Bearbricks are designer art toys valued for their artistic collaborations, rarity, and cultural appeal. They serve as collectible art pieces rather than functional figures.",
     icon: Package
   },
   
 ];
 
 const FaqPage = () => {
+
   const [openIndex, setOpenIndex] = useState(null);
   
-  const handleWhatsAppClick = () => {
-    window.open('https://wa.me/0661715003', '_blank');
-  };
+ const { cartItems, removeFromCart, updateQuantity } = useCart();
+   const [showContactForm, setShowContactForm] = useState(false);
+   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+ 
+   const handleWhatsAppClick = () => {
+     const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
+     window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
+   };
+ 
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-zinc-900">
-                         <CustomCursor/>
+                         {/* <CustomCursor/> */}
 
       <Navbar />
       
@@ -79,7 +87,7 @@ const FaqPage = () => {
           }}
           whileTap={{ scale: 0.95 }}
           onClick={handleWhatsAppClick}
-          className="bg-[#FFC23C] text-black p-4 rounded-full shadow-lg flex items-center justify-center group"
+          className="bg-purple-400 text-black p-4 rounded-full shadow-lg flex items-center justify-center group"
         >
           <motion.div
             animate={{ 
@@ -116,7 +124,7 @@ const FaqPage = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold text-white mb-4">Frequently Asked Questions</h1>
-          <p className="text-gray-400">Everything you need to know about KAWS and our store</p>
+          <p className="text-gray-400">Everything you need to know about BEARBRICK and our store</p>
         </motion.div>
 
         <div className="space-y-4">
@@ -135,7 +143,7 @@ const FaqPage = () => {
                 <div className="flex items-center gap-3">
                   {React.createElement(faq.icon, { 
                     size: 20,
-                    className: "text-[#FFC23C]"
+                    className: "text-purple-600"
                   })}
                   <span className="font-semibold">{faq.question}</span>
                 </div>
@@ -171,7 +179,7 @@ const FaqPage = () => {
             Still have questions? Feel free to{" "}
             <button
               onClick={handleWhatsAppClick}
-              className="text-[#FFC23C] hover:underline inline-flex items-center gap-1"
+              className="text-purple-400 hover:underline inline-flex items-center gap-1"
             >
               contact us <MessageCircle size={16} />
             </button>
