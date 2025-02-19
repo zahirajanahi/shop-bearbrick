@@ -1,0 +1,19 @@
+.main{
+    position: relative;
+    z-index: 1;
+}
+
+.main::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../img/Coffee\ Bean\ Brown\ Wallpaper\ \(1\).png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity:0.3; 
+    z-index: -1;
+}

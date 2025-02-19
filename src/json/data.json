@@ -1,0 +1,134 @@
+[
+    {
+        "id": 1,
+        "img": "blog1",
+        "name": "Black Friday Guide: Best Sales & Discount Codes",
+        "description": "A timeless classic cotton t-shirt featuring a practical pocket for convenience. Soft and durable, perfect for everyday wear.",
+        "price": 19.99,
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "status": "No Sales",
+        "reduction": 0
+    },
+    {
+        "id": 2,
+        "img": "blog2",
+        "name": "Black Friday Guide: Best Sales & Discount Codes",
+        "description": "A timeless classic cotton t-shirt featuring a practical pocket for convenience. Soft and durable, perfect for everyday wear.",
+        "price": 19.99,
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "status": "No Sales",
+        "reduction": 0
+    },
+    {
+        "id": 3,
+        "img": "blog3",
+        "name": "Black Friday Guide: Best Sales & Discount Codes",
+        "description": "A timeless classic cotton t-shirt featuring a practical pocket for convenience. Soft and durable, perfect for everyday wear.",
+        "price": 19.99,
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "status": "No Sales",
+        "reduction": 0
+    },
+    {
+        "id": 4,
+        "img": "product1",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "A timeless classic cotton t-shirt featuring a practical pocket for convenience. Soft and durable, perfect for everyday wear.",
+        "price": 19.99,
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "status": "No Sales",
+        "reduction": 0
+    },
+    {
+        "id": 5,
+        "img": "product2",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "A refined long sleeve button-down shirt with a sleek design. Ideal for formal occasions or a smart-casual look.",
+        "price": 29.99,
+        "status": "No Sales",
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "reduction": 0
+    },
+    {
+        "id": 6,
+        "img": "product3",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "Crafted from premium quality fabric, this crew neck t-shirt offers exceptional comfort and a modern fit. Ideal for any casual outing.",
+        "price": 21.99,
+        "status": "No Sales",
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "reduction": 0
+    },
+    {
+        "id": 7,
+        "img": "product4",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "A stylish long sleeve shirt with a slim fit, perfect for layering or wearing alone. Adds a touch of elegance to any outfit.",
+        "price": 34.99,
+        "status": "No Sales",
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "reduction": 0
+    },
+    {
+        "id": 8,
+        "img": "product5",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "Soft touch v-neck t-shirt featuring a trendy graphic print. Perfect for adding a bit of flair to your casual wardrobe.",
+        "price": 18.49,
+        "status": "No Sales",
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "reduction": 0
+    },
+    {
+        "id": 9,
+        "img": "product6",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "A classic long sleeve shirt with versatile roll-tab sleeves. Ideal for transitioning between seasons with style.",
+        "price": 27.99,
+        "status": "No Sales",
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "reduction": 0
+    },
+    {
+        "id": 10,
+        "img": "product7",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "High-end performance t-shirt designed for active wear. Breathable and moisture-wicking, perfect for workouts and outdoor activities.",
+        "price": 23.99,
+        "status": "No Sales",
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "reduction": 0
+    },
+    {
+        "id": 11,
+        "img": "product8",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "Sophisticated tailored long sleeve dress shirt with a polished finish. Ideal for professional settings and formal events.",
+        "price": 39.99,
+        "status": "No Sales",
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "reduction": 0
+    },
+    {
+        "id": 12,
+        "img": "sunglasses",
+        "name": "boxy7 T-shirt with roll Sleeve",
+        "description": "Sophisticated tailored long sleeve dress shirt with a polished finish. Ideal for professional settings and formal events.",
+        "price": 15.30,
+        "status": "No Sales",
+        "designer": "fashe-theme Admin",
+        "date": "Dec 28,2017",
+        "reduction": 0
+    }
+]
