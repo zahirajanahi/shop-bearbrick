@@ -158,9 +158,9 @@ const Landing = () => {
                             className='flex space-x-1 items-center mt-5'
                             whileHover={{ scale: 1.05 }}
                         >
-                            <button className='ms-8 bg-transparent border-zinc-100 border px-3 py-1 rounded-full hover:text-zinc-950 hover:bg-white text-zinc-100 transition duration-500 '>
+                            <a href='/shop' className='ms-8 bg-transparent border-zinc-100 border px-3 py-1 rounded-full hover:text-zinc-950 hover:bg-white text-zinc-100 transition duration-500 '>
                                 Shop Now
-                            </button> 
+                            </a> 
                             <button className='border border-zinc-100 px-1 py-1  transition duration-500  rounded-full text-zinc-100 text-2xl'>
                                 <IoIosArrowRoundForward />
                             </button>
@@ -260,13 +260,15 @@ const Landing = () => {
                             >
                                 FAVORITE
                             </motion.h1>
-                            <motion.button 
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.95 }}
-                                className='mt-5 md:ms-[43vw] ms-[36vw] px-10 py-2 border rounded-full border-zinc-100 font-bold'
-                            >
-                                NOW
-                            </motion.button>
+                            <a href="/shop">
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className="mt-5 md:ms-[43vw] ms-[36vw] px-10 py-2 border rounded-full border-zinc-100 font-bold"
+      >
+        NOW
+      </motion.button>
+    </a>
                         </motion.section>
               
                         <Footer/>
