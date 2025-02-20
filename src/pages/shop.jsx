@@ -62,15 +62,19 @@ Swal.fire({
 
     
   };
+
   const fetchProducts = async () => {
     setIsLoading(true);
     try {
+      // Get all products first
       const { data, error } = await supabase
         .from('products')
         .select('*')
+        .eq('category', 'figure') // Filter for 'figure' category
         .order('created_at', { ascending: false });
+      
       if (error) throw error;
-      setProducts(data);
+      setProducts(data || []); // Ensure we always set an array
     } catch (error) {
       console.error('Error fetching products:', error);
     } finally {
@@ -115,10 +119,11 @@ Swal.fire({
       return new Date(b.created_at) - new Date(a.created_at);
     }
   });
+  
   return (
     <div className="min-h-screen bg-black">
       <Toaster position="top-right" />
-      <Navbar cartItems={cartItems} />
+      <Navbar cartItems={cartItems}  />
 
        {/* WhatsApp Button */}
             <div className="fixed bottom-8 right-8 z-50 flex flex-col items-end">
@@ -184,20 +189,20 @@ Swal.fire({
             </div>
       
       {/* Hero Section */}
-      <div className="relative h-[80vh] bg-black overflow-hidden">
+      <div className="relative md:h-[80vh] h-[50vh] bg-black overflow-hidden">
         <div className="absolute inset-0 ">
           <img 
             src={Images.shop}
             alt="Collection Banner"
-            className="w-full h-[70vh] object-cover "
+            className="w-full md:h-[70vh] h-[45vh] object-cover "
           />
         </div>
         
-        <div className="relative h-full max-w-7xl  px-4 flex flex-col mt-24 ms-10">
+        <div className="relative h-full max-w-7xl  px-4 flex flex-col mt-24 ms-5">
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-bold text-gray-100 mb-6"
+            className="text-4xl md:text-5xl md:mt-8 font-bold text-gray-100 mb-6"
           >
             Discover <span className='text-[#754b9f]'> Our</span> <br /> Collection
           </motion.h1>
@@ -205,78 +210,91 @@ Swal.fire({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-lg text-gray-400 max-w-2xl"
+            className="text-lg text-gray-400 md:max-w-2xl w-[55vw]"
           >
             Explore our carefully curated selection of premium products
           </motion.p>
-          <div className="relative flex-1 min-w-[300px] mt-6">
+ 
+          <div className="relative flex-1 min-w-[300px] mt-6 text-zinc-100">
               <input
                 type="text"
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="md:w-[30vw] w-[50vw] pl-10 pr-4 py-3 bg-transparent rounded-3xl border border-zinc-800 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all shadow-sm"
+                className="md:w-[30vw] w-[50vw]  pl-10 pr-4 py-3 bg-transparent rounded-3xl border border-zinc-800 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all shadow-sm"
               />
               <Search className="absolute left-3 top-3.5 text-gray-400" size={20} />
-            </div>
+         </div> 
             
         </div>
+        
       </div>
-       {/* Filters */}
-       <div className="mb-6">
-  <div className="flex float-end mb-5 me-10">
-    <button
-      onClick={() => setIsFilterOpen(!isFilterOpen)}
-      className="px-6 py-3 text-gray-300 bg-zinc-900 rounded-3xl border border-zinc-700 flex items-center gap-2 hover:bg-zinc-800 transition-colors shadow-md"
-    >
-      <SlidersHorizontal size={20} />
-      Filters
-    </button>
-  </div>
-  {/* Filter Panel */}
-  {isFilterOpen && (
-    <div className="p-7 me-10 ms-10 bg-zinc-900 rounded-lg border border-gray-700 shadow-md">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Price Range Filter */}
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Price Range</label>
-          <select
-            value={filters.priceRange}
-            onChange={(e) => handleFilterChange('priceRange', e.target.value)}
-            className="w-full p-2 border bg-zinc-800 text-gray-200 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-          >
-            <option value="all">All Prices</option>
-            <option value="under100">Under $100</option>
-            <option value="100to500">$100 - $500</option>
-            <option value="over500">Over $500</option>
-          </select>
-        </div>
-        {/* Sort By Filter */}
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">Sort By</label>
-          <select
-            value={filters.sortBy}
-            onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-            className="w-full p-2 border bg-zinc-800 text-gray-200 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
-          >
-            <option value="newest">Newest First</option>
-            <option value="priceAsc">Price: Low to High</option>
-            <option value="priceDesc">Price: High to Low</option>
-          </select>
-        </div>
-      </div>
-      <button
-        onClick={resetFilters}
-        className="mt-4 px-4 py-2 text-sm text-gray-400 hover:text-gray-200 transition-colors"
-      >
-        Reset Filters
-      </button>
-    </div>
-  )}
-</div>
+      <motion.div 
+              className="relative float-end me-20"
+              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              transition={{ delay: 0.3 }}
+            >
+              <button
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+                className="flex items-center gap-2 px-4 py-3 bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 rounded-3xl text-white hover:bg-zinc-700/50 transition-all duration-300 shadow-lg"
+              >
+                <SlidersHorizontal size={18} />
+                <span className="font-medium">Filters</span>
+              </button>
+
+              {isFilterOpen && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  className="absolute right-0 mt-2 w-72 bg-zinc-900/95 backdrop-blur-lg border border-zinc-700/50 rounded-xl shadow-xl z-50 overflow-hidden"
+                >
+                  <div className="p-4">
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Price Range
+                      </label>
+                      <select
+                        value={filters.priceRange}
+                        onChange={(e) => handleFilterChange('priceRange', e.target.value)}
+                        className="w-full p-2.5 bg-zinc-800/50 text-gray-200 border border-zinc-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                      >
+                        <option value="all">All Prices</option>
+                        <option value="under100">Under $100</option>
+                        <option value="100to500">$100 - $500</option>
+                        <option value="over500">Over $500</option>
+                      </select>
+                    </div>
+
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-300 mb-2">
+                        Sort By
+                      </label>
+                      <select
+                        value={filters.sortBy}
+                        onChange={(e) => handleFilterChange('sortBy', e.target.value)}
+                        className="w-full p-2.5 bg-zinc-800/50 text-gray-200 border border-zinc-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
+                      >
+                        <option value="newest">Newest First</option>
+                        <option value="priceAsc">Price: Low to High</option>
+                        <option value="priceDesc">Price: High to Low</option>
+                      </select>
+                    </div>
+
+                    <button
+                      onClick={resetFilters}
+                      className="w-full mt-2 px-4 py-2 text-sm bg-purple-500/20 text-purple-300 rounded-lg hover:bg-purple-500/30 transition-colors"
+                    >
+                      Reset Filters
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+      </motion.div>
 
 
-      <main className="max-w-7xl mx-auto px-10 mb-28 mt-16">
+  <main className="max-w-7xl mx-auto  mb-28 mt-20 md:ms-10 me-28 ">
 
        
 

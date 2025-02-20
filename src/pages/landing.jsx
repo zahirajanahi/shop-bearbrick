@@ -150,7 +150,7 @@ const Landing = () => {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="absolute bottom-40 ms-96 text-white text-lg md:block hidden"
+                        className="absolute bottom-40 ms-[32vw] text-white text-lg md:block hidden"
                     >
                         <p>Explore a stylish selection of Bearbrick collectibles, from fashion collabs to <br /> limited-edition art pieces. Find your next statement piece today</p>
 
@@ -158,23 +158,23 @@ const Landing = () => {
                             className='flex space-x-1 items-center mt-5'
                             whileHover={{ scale: 1.05 }}
                         >
-                            <button className='ms-8 bg-transparent border-zinc-100 border px-4 py-2 rounded-full hover:text-zinc-950 hover:bg-white text-zinc-100 transition duration-500 '>
+                            <button className='ms-8 bg-transparent border-zinc-100 border px-3 py-1 rounded-full hover:text-zinc-950 hover:bg-white text-zinc-100 transition duration-500 '>
                                 Shop Now
                             </button> 
-                            <button className='border border-zinc-100 px-2 py-2  transition duration-500  rounded-full text-zinc-100 text-2xl'>
+                            <button className='border border-zinc-100 px-1 py-1  transition duration-500  rounded-full text-zinc-100 text-2xl'>
                                 <IoIosArrowRoundForward />
                             </button>
                         </motion.div>
                     </motion.div>
 
                     <motion.img 
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.2 }}
-          src={isMobile ? Images.lnding2 : Images.lnding1} 
-          alt="Hero image" 
-          className="object-cover h-[100vh]"
-        />
+                      initial={{ scale: 1.1 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 1.2 }}
+                     src={isMobile ? Images.lnding2 : Images.lnding1} 
+                     alt="Hero image" 
+                      className="object-cover h-[100vh]"
+                     />
                 </div>
 
                 <motion.section 
@@ -189,7 +189,7 @@ const Landing = () => {
                         transition={{ duration: 0.8 }}
                         src={isMobile ? Images.mobile2 : Images.section2}
                         alt="" 
-                        className='h-[110vh]  w-full'
+                        className='h-[110vh] w-full'
                     />
                      
                     <div className='pt-12 text-zinc-100 bg-gradient-to-r from-black via-[#280239] to-black'> 
@@ -263,7 +263,7 @@ const Landing = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.1 }}
                                 whileTap={{ scale: 0.95 }}
-                                className='mt-4 ms-[43vw] px-10 py-2 border rounded-full border-zinc-100 font-bold'
+                                className='mt-5 md:ms-[43vw] ms-[36vw] px-10 py-2 border rounded-full border-zinc-100 font-bold'
                             >
                                 NOW
                             </motion.button>

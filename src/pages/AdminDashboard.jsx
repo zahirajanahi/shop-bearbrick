@@ -13,15 +13,20 @@ export default function AdminDashboard() {
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const productsPerPage = 5;
+
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     price: "",
     image_url: "",
+    category: "figure" 
   });
+
   const [uploading, setUploading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -92,6 +97,7 @@ export default function AdminDashboard() {
       [name]: value,
     }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -109,6 +115,7 @@ export default function AdminDashboard() {
             description: formData.description,
             price: parseFloat(formData.price),
             image_url: imageUrl,
+            category: formData.category, // Add category field
           })
           .eq("id", editingProduct.id);
         if (error) throw error;
@@ -120,6 +127,7 @@ export default function AdminDashboard() {
             description: formData.description,
             price: parseFloat(formData.price),
             image_url: imageUrl,
+            category: formData.category, // Add category field
           },
         ]);
         if (error) throw error;
@@ -127,7 +135,13 @@ export default function AdminDashboard() {
       }
       setIsModalOpen(false);
       setEditingProduct(null);
-      setFormData({ title: "", description: "", price: "", image_url: "" });
+      setFormData({
+        title: "",
+        description: "",
+        price: "",
+        image_url: "",
+        category: "figure" // Reset to default category
+      });
       setImageFile(null);
       setPreviewUrl("");
       fetchProducts();
@@ -138,6 +152,8 @@ export default function AdminDashboard() {
       console.error("Error:", error);
     }
   };
+  
+  // Also update the handleEdit function to include category
   const handleEdit = (product) => {
     setEditingProduct(product);
     setFormData({
@@ -145,9 +161,14 @@ export default function AdminDashboard() {
       description: product.description,
       price: product.price.toString(),
       image_url: product.image_url,
+      category: product.category || "figure", // Include category, default if not present
     });
     setIsModalOpen(true);
   };
+  
+
+
+
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
       try {
@@ -369,6 +390,22 @@ export default function AdminDashboard() {
                   className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
                 />
               </div>
+
+              <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Category
+            </label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={handleInputChange}
+              required
+              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+            >
+              <option value="figure">Figure</option>
+              <option value="tableau">Tableau</option>
+            </select>
+          </div>
               
               <div>
                 <label className="block text-sm font-medium text-gray-700">
