@@ -3,11 +3,13 @@ import { motion } from 'framer-motion';
 import { Images } from "../constant";
 import Navbar from '../components/navbar';
 import { IoIosArrowRoundForward } from "react-icons/io";
+import { FaArrowDownLong } from "react-icons/fa6";
 import { Helmet } from "react-helmet";
 import { Hash } from 'lucide-react';
 import Footer from '../components/footer';
 import { LiaWhatsapp } from 'react-icons/lia';
 import { useCart } from '../contexts/CartContext';
+import { GoArrowDown } from "react-icons/go";
 
 
 const Landing = () => {
@@ -150,7 +152,7 @@ const Landing = () => {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="absolute bottom-40 ms-[32vw] text-white text-lg md:block hidden"
+                        className="absolute bottom-44 ms-[32vw] text-white text-lg md:block hidden"
                     >
                         <p>Explore a stylish selection of Bearbrick collectibles, from fashion collabs to <br /> limited-edition art pieces. Find your next statement piece today</p>
 
@@ -166,6 +168,24 @@ const Landing = () => {
                             </button>
                         </motion.div>
                     </motion.div>
+
+                    <motion.div 
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.8 }}
+                        className="absolute bottom-40 ms-[80vw] text-white text-lg block md:hidden"
+                    >     
+                        <motion.div 
+                            className='flex space-x-1 items-center mt-5'
+                            whileHover={{ scale: 1.05 }}
+                        > 
+                            <button className='border border-zinc-100 px-1 py-1  transition duration-500  rounded-full text-zinc-100 text-2xl'>
+                            <GoArrowDown/>
+                            </button>
+                        </motion.div>
+                    </motion.div>
+
+
 
                     <motion.img 
                       initial={{ scale: 1.1 }}
