@@ -54,14 +54,15 @@ const TornPaper = () => {
           >
             <button className="group relative px-8 py-3 bg-white text-black rounded-full hover:bg-gray-100 transition-colors duration-300">
               Explore Collection
-              <span className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300">
+              <span  className="absolute right-4 top-1/2 transform -translate-y-1/2 opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all duration-300">
                 →
               </span>
+              
             </button>
           </motion.div>
         </div>
       </motion.div>
-
+  
       {/* Bottom torn edge */}
       <div className="absolute bottom-0 left-0 w-full h-16 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0wLDAgTDEwMCwwIEwxMDAsMTAwIEwwLDEwMCBaIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg==')] bg-repeat-x" />
     </div>

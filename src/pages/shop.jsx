@@ -6,7 +6,7 @@ import Navbar from '../components/navbar';
 import { useCart } from '../contexts/CartContext';
 import { motion } from 'framer-motion';
 import Footer from '../components/footer';
-import { Search, SlidersHorizontal, X } from 'lucide-react';
+import { Search, SlidersHorizontal} from 'lucide-react';
 import { LiaWhatsapp } from "react-icons/lia";
 import Swal from 'sweetalert2';
 import { Images } from "../constant";
@@ -37,6 +37,10 @@ export const Shop = () => {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+
+
+  
   const handleAddToCart = (product) => {
     addToCart(product);
 

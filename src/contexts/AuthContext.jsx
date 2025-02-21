@@ -8,6 +8,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    
     // Check active sessions and set the user
     const checkSession = async () => {
       try {
@@ -66,6 +67,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
+    
     <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>

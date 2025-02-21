@@ -211,7 +211,9 @@ const Navbar = () => {
                 <p className="text-white/60 text-sm font-medium">Shop</p>
                 <a href="/shop" className="block pl-4 text-white/90 hover:text-purple-300 transition-colors text-sm font-medium">B-figures</a>
                 <a href="/shop-table" className="block pl-4 text-white/90 hover:text-purple-300 transition-colors text-sm font-medium">B-tableau</a>
-              </div>              <a href="/faqs" className="text-white/90 hover:text-purple-300 transition-colors text-sm font-medium">FAQs</a>
+              </div>         
+              
+             <a href="/faqs" className="text-white/90 hover:text-purple-300 transition-colors text-sm font-medium">FAQs</a>
             </div>
           </div>
         )}

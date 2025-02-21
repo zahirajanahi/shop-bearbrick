@@ -41,7 +41,7 @@ export function AdminLogin() {
           <img
             src={Images.login1}
             alt="Admin Login"
-            className="w-full h-full object-cover rounded-l-lg"
+            className="w-full h-[70vh]  object-cover rounded-l-lg"
           />
         </motion.div>
 

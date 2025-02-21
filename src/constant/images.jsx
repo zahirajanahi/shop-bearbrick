@@ -8,5 +8,6 @@ export default {
     b1:require('../assets/img/b1.png'),
     b2:require('../assets/img/b2.png'),
     b3:require('../assets/img/b3.png'),
+    login1:require('../assets/img/login.jpg'),
 
 }
