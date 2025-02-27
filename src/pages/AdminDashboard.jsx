@@ -31,6 +31,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetchProducts();
   }, []);
+
   useEffect(() => {
     // Filter products based on search query
     const filtered = products.filter(product => 
@@ -40,6 +41,7 @@ export default function AdminDashboard() {
     setFilteredProducts(filtered);
     setCurrentPage(1); // Reset to first page when search changes
   }, [searchQuery, products]);
+
   const fetchProducts = async () => {
     try {
       const { data, error } = await supabase
@@ -53,12 +55,14 @@ export default function AdminDashboard() {
       console.error("Error:", error);
     }
   };
+
   // Pagination calculations
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -68,6 +72,7 @@ export default function AdminDashboard() {
       setPreviewUrl(objectUrl);
     }
   };
+
   const uploadImage = async (file) => {
     try {
       setUploading(true);
@@ -91,6 +96,7 @@ export default function AdminDashboard() {
       setUploading(false);
     }
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -98,7 +104,7 @@ export default function AdminDashboard() {
       [name]: value,
     }));
   };
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -183,6 +189,7 @@ export default function AdminDashboard() {
       }
     }
   };
+
   const handleSignOut = async () => {
     try {
       await signOut();
@@ -192,6 +199,7 @@ export default function AdminDashboard() {
       console.error("Error:", error);
     }
   };
+
   const isValidImageUrl = (url) => {
     if (!url) return false;
     return (
@@ -200,8 +208,10 @@ export default function AdminDashboard() {
       url.startsWith("https://via.placeholder.com")
     );
   };
+
   return (
     <div className="min-h-screen bg-gray-50/50">
+
     <nav className="bg-white  border border-zinc-300 w-full z-50 backdrop-blur-lg bg-white/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">

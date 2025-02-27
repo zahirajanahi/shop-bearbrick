@@ -27,11 +27,11 @@ export const ShopTable = () => {
     fetchProducts();
   }, []);
 
-  const handleWhatsAppClick = () => {
-    const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
-    window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
-  };
+  // const handleWhatsAppClick = () => {
+  //   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  //   const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
+  //   window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
+  // };
 
   const handleAddToCart = (product) => {
     addToCart(product);

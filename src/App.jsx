@@ -12,6 +12,7 @@ import CartPage from './pages/cartPage';
 import Test from './pages/faqs';
 import FaqPage from './pages/faqs';
 import ShopTable from './pages/shop-table';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -23,10 +24,10 @@ function App() {
           <Routes>
             <Route path="/shop" element={<Shop />} />
             <Route path="/" element={<Landing />} />
+            {/* <Route path="/*" element={<NotFound />} /> */}
             <Route path='/cartPage' element={<CartPage />} />
             <Route path='/faqs' element={<FaqPage />} />
             <Route path="/shop-table" element={<ShopTable />} />
-
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route
               path="/admin/dashboard"

@@ -9,12 +9,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand Section */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold">BEARBRICK</h3>
+            <h3 className="text-2xl font-bold">FiguresUrban</h3>
             <p className="text-gray-400 text-sm">
               Curating exclusive designer toys and collectibles for the most discerning collectors.
             </p>
          
           </div>
+
 
 
           {/* Support */}
@@ -28,14 +29,14 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center group">
-                  Shipping Info
+                <a href="/shop" className="text-gray-400 hover:text-white transition-colors flex items-center group">
+                  figures
                   <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
               <li>
-                <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center group">
-                  Returns
+                <a href="/shop-table" className="text-gray-400 hover:text-white transition-colors flex items-center group">
+                  tableau 
                   <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </a>
               </li>
@@ -58,7 +59,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2025 BEARBRICK. All rights reserved.
+            © 2025 FiguresUrban. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>

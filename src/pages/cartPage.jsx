@@ -13,10 +13,10 @@ const CartPage = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const handleWhatsAppClick = () => {
-    const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
-    window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
-  };
+  // const handleWhatsAppClick = () => {
+  //   const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
+  //   window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
+  // };
 
  
 
@@ -93,7 +93,7 @@ const CartPage = () => {
                     boxShadow: "0 0 25px rgba(255, 194, 60, 0.5)"
                   }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={handleWhatsAppClick}
+                  // onClick={handleWhatsAppClick}
                   className="bg-purple-400 text-black p-4 rounded-full shadow-lg flex items-center justify-center group"
                 >
                   <motion.div
@@ -219,7 +219,7 @@ const CartPage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={handleWhatsAppClick}
+                // onClick={handleWhatsAppClick}
                 className="w-full flex items-center justify-center gap-2 text-green-700 border border-green-700 py-3 px-6 rounded-full text-sm font-light tracking-wide hover:bg-green-700 hover:text-white transition-colors"
               >
                 <Send size={16} />

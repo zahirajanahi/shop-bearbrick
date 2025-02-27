@@ -20,10 +20,10 @@ const Landing = () => {
        const [showContactForm, setShowContactForm] = useState(false);
        const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
      
-       const handleWhatsAppClick = () => {
-         const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
-         window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
-       };
+      //  const handleWhatsAppClick = () => {
+      //    const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
+      //    window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
+      //  };
 
        const [isMobile, setIsMobile] = useState(false);
 
@@ -114,7 +114,7 @@ const Landing = () => {
                         boxShadow: "0 0 25px rgba(255, 194, 60, 0.5)"
                       }}
                       whileTap={{ scale: 0.95 }}
-                      onClick={handleWhatsAppClick}
+                      // onClick={handleWhatsAppClick}
                       className="bg-purple-400 text-black p-4 rounded-full shadow-lg flex items-center justify-center group"
                     >
                       <motion.div
@@ -152,7 +152,7 @@ const Landing = () => {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="absolute bottom-44 ms-[32vw] text-white text-lg md:block hidden"
+                        className="absolute bottom-40 ms-[32vw] text-white text-lg md:block hidden"
                     >
                         <p>Explore a stylish selection of Bearbrick collectibles, from fashion collabs to <br /> limited-edition art pieces. Find your next statement piece today</p>
 
