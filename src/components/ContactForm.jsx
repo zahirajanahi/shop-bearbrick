@@ -79,92 +79,92 @@ const ContactForm = ({ cartItems, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full">
-        <h2 className="text-2xl font-semibold mb-4">Sent Your order </h2>
-        <form ref={form} onSubmit={handleSubmit} className="space-y-4">
-          <div className='flex space-x-2'>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Full Name</label>
-            <input
-              type="text"
-              name="user_name"
-              required
-              className="mt-1 w-[41vw] block md:w-[14vw] rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+  <div className="bg-white rounded-lg p-6 max-w-md w-full">
+    <h2 className="text-2xl font-semibold mb-4">Sent Your order</h2>
+    <form ref={form} onSubmit={handleSubmit} className="space-y-4">
+      <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+        <div className="flex-1">
+          <label className="block text-sm font-medium text-gray-700">Full Name</label>
+          <input
+            type="text"
+            name="user_name"
+            required
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              name="user_email"
-              required
-              className="mt-1 block md:w-[16vw] w-[42vw] rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
-          </div>
-          
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              <span className="flex items-center gap-2">
-                <Phone size={16} /> Phone Number
-              </span>
-            </label>
-            <input
-              type="tel"
-              name="user_phone"
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              <span className="flex items-center gap-2">
-                <MapPin size={16} /> Delivery Address
-              </span>
-            </label>
-            <textarea
-              name="user_address"
-              rows={2}
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              placeholder="Street address, City, Postal code"
-            ></textarea>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Message (Optional)</label>
-            <textarea
-              name="message"
-              rows={3}
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-              placeholder="Any special instructions or notes?"
-            ></textarea>
-          </div>
-
-          <div className="flex gap-4">
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="flex-1 bg-black text-white py-2 rounded-lg hover:bg-zinc-900 transition-colors flex items-center justify-center gap-2 disabled:bg-zinc-900"
-            >
-              <Send size={20} />
-              {isSubmitting ? 'Sending...' : 'Send Message'}
-            </button>
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300 transition-colors"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
+        <div className="flex-1">
+          <label className="block text-sm font-medium text-gray-700">Email</label>
+          <input
+            type="email"
+            name="user_email"
+            required
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+        </div>
       </div>
-    </div>
+      
+      {/* Rest of your form remains the same */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          <span className="flex items-center gap-2">
+            <Phone size={16} /> Phone Number
+          </span>
+        </label>
+        <input
+          type="tel"
+          name="user_phone"
+          required
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">
+          <span className="flex items-center gap-2">
+            <MapPin size={16} /> Delivery Address
+          </span>
+        </label>
+        <textarea
+          name="user_address"
+          rows={2}
+          required
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          placeholder="Street address, City, Postal code"
+        ></textarea>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700">Message (Optional)</label>
+        <textarea
+          name="message"
+          rows={3}
+          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          placeholder="Any special instructions or notes?"
+        ></textarea>
+      </div>
+
+      <div className="flex gap-4">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="flex-1 bg-black text-white py-2 rounded-lg hover:bg-zinc-900 transition-colors flex items-center justify-center gap-2 disabled:bg-zinc-900"
+        >
+          <Send size={20} />
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </button>
+        <button
+          type="button"
+          onClick={onClose}
+          className="flex-1 bg-gray-200 text-gray-800 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
   );
 };
 

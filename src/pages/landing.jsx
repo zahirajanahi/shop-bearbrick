@@ -20,10 +20,10 @@ const Landing = () => {
        const [showContactForm, setShowContactForm] = useState(false);
        const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
      
-      //  const handleWhatsAppClick = () => {
-      //    const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
-      //    window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
-      //  };
+       const handleWhatsAppClick = () => {
+         const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
+         window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
+       };
 
        const [isMobile, setIsMobile] = useState(false);
 
@@ -114,7 +114,7 @@ const Landing = () => {
                         boxShadow: "0 0 25px rgba(255, 194, 60, 0.5)"
                       }}
                       whileTap={{ scale: 0.95 }}
-                      // onClick={handleWhatsAppClick}
+                      onClick={handleWhatsAppClick}
                       className="bg-purple-400 text-black p-4 rounded-full shadow-lg flex items-center justify-center group"
                     >
                       <motion.div
@@ -147,27 +147,37 @@ const Landing = () => {
             <div className='relative'>
                 <div className='bg-[#000] relative'>   
                     <Navbar />
-
-                    <motion.div 
-                        initial={{ opacity: 0, y: 40 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                        className="absolute bottom-40 ms-[32vw] text-white text-lg md:block hidden"
-                    >
-                        <p>Explore a stylish selection of Bearbrick collectibles, from fashion collabs to <br /> limited-edition art pieces. Find your next statement piece today</p>
-
-                        <motion.div 
-                            className='flex space-x-1 items-center mt-5'
-                            whileHover={{ scale: 1.05 }}
-                        >
-                            <a href='/shop' className='ms-8 bg-transparent border-zinc-100 border px-3 py-1 rounded-full hover:text-zinc-950 hover:bg-white text-zinc-100 transition duration-500 '>
-                                Shop Now
-                            </a> 
-                            <button className='border border-zinc-100 px-1 py-1  transition duration-500  rounded-full text-zinc-100 text-2xl'>
-                                <IoIosArrowRoundForward />
-                            </button>
-                        </motion.div>
-                    </motion.div>
+<motion.div 
+    initial={{ opacity: 0, y: 40 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.5, duration: 0.8 }}
+    className="absolute w-full max-w-4xl px-4 text-white text-lg"
+    style={{
+        top: '52%',
+        left: '34%',
+        transform: 'translate(-50%, -50%)'
+    }}
+>
+    <div className="text-left">
+     
+        
+        <p className="max-w-xl mb-6"> 
+            Explore a stylish selection of Bearbrick collectibles, from fashion collabs to limited-edition art pieces. Find your next statement piece today .
+        </p>
+      
+        <motion.div 
+            className='flex space-x-3 items-center ms-10' 
+            whileHover={{ scale: 1.05 }}
+        >
+            <a href='/shop' className='bg-transparent border-zinc-100 border px-4 py-2 rounded-full hover:text-zinc-950 hover:bg-white text-zinc-100 transition duration-500'>
+                Shop Now
+            </a> 
+            <button className='border border-zinc-100 p-2 transition duration-500 rounded-full text-zinc-100 text-2xl'>
+                <IoIosArrowRoundForward />
+            </button>
+        </motion.div>
+    </div>
+</motion.div>
 
                     <motion.div 
                         initial={{ opacity: 0, y: 40 }}
@@ -242,7 +252,7 @@ const Landing = () => {
                             <motion.img whileHover={{ scale: 1.05 }} src={Images.b3} className='md:h-[75vh] h-[65vh]' alt="" />
                         </motion.div> 
                          
-                        <div className="animate-scroll inline-flex pb-10 gap-4 whitespace-nowrap pt-16">
+                     <div className="animate-scroll-inner animate-scroll inline-flex pb-10 gap-4 whitespace-nowrap pt-16">
                             {scrollingKeywords.map((keyword, index) => (
                                 <motion.div
                                     key={index}

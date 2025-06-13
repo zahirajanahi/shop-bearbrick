@@ -13,10 +13,10 @@ const CartPage = () => {
   const [showContactForm, setShowContactForm] = useState(false);
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // const handleWhatsAppClick = () => {
-  //   const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
-  //   window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
-  // };
+  const handleWhatsAppClick = () => {
+    const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
+    window.open(`https://wa.me/+212661715003?text=${message}`, '_blank');
+  };
 
  
 
@@ -27,40 +27,7 @@ const CartPage = () => {
        
               
         <Navbar cartItems={cartItems} />
-        
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto px-4 py-8 pt-28"
-        >
-          <div className="bg-zinc-800 p-12 rounded-2xl shadow-xl text-center border border-zinc-700">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ 
-                type: "spring",
-                stiffness: 260,
-                damping: 20,
-                delay: 0.2
-              }}
-            >
-              <ShoppingCart size={64} className="mx-auto text-purple-500 mb-6" />
-            </motion.div>
-            <h2 className="text-3xl font-bold mb-3">Your cart is empty</h2>
-            <p className="text-gray-400 text-lg">Start adding some amazing BEARBRICK items to your cart!</p>
-          </div>
-        </motion.div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-zinc-900 text-white">
-      <Navbar cartItems={cartItems} />
-      
-        {/* WhatsApp Button */}
+         {/* WhatsApp Button */}
         <div className="fixed bottom-8 right-8 z-50 flex flex-col items-end">
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
@@ -93,7 +60,7 @@ const CartPage = () => {
                     boxShadow: "0 0 25px rgba(255, 194, 60, 0.5)"
                   }}
                   whileTap={{ scale: 0.95 }}
-                  // onClick={handleWhatsAppClick}
+                  onClick={handleWhatsAppClick}
                   className="bg-purple-400 text-black p-4 rounded-full shadow-lg flex items-center justify-center group"
                 >
                   <motion.div
@@ -122,6 +89,39 @@ const CartPage = () => {
                   </motion.span>
                 </motion.button>
           </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto px-4 py-8 pt-28"
+        >
+          <div className="bg-zinc-800 p-12 rounded-2xl shadow-xl text-center border border-zinc-700">
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ 
+                type: "spring",
+                stiffness: 260,
+                damping: 20,
+                delay: 0.2
+              }}
+            >
+              <ShoppingCart size={64} className="mx-auto text-purple-500 mb-6" />
+            </motion.div>
+            <h2 className="text-3xl font-bold mb-3">Your cart is empty</h2>
+            <p className="text-gray-400 text-lg">Start adding some amazing BEARBRICK items to your cart!</p>
+          </div>
+        </motion.div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-zinc-900 text-white">
+      <Navbar cartItems={cartItems} />
+      
+       
 
       <div className="max-w-[1200px] mx-auto px-8 py-12 pt-32">
         <motion.h1 
@@ -219,7 +219,7 @@ const CartPage = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                // onClick={handleWhatsAppClick}
+                onClick={handleWhatsAppClick}
                 className="w-full flex items-center justify-center gap-2 text-green-700 border border-green-700 py-3 px-6 rounded-full text-sm font-light tracking-wide hover:bg-green-700 hover:text-white transition-colors"
               >
                 <Send size={16} />
