@@ -147,7 +147,7 @@ const Landing = () => {
             <div className='relative'>
                 <div className='bg-[#000] relative'>   
                     <Navbar />
-<motion.div 
+{/* <motion.div 
     initial={{ opacity: 0, y: 40 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.5, duration: 0.8 }}
@@ -177,7 +177,32 @@ const Landing = () => {
             </button>
         </motion.div>
     </div>
-</motion.div>
+</motion.div> */}
+
+   <motion.div 
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="absolute top-[30vh] left-1/2  w-full max-w-4xl px-4 text-white text-lg md:block hidden"
+        >
+            <p className="text-center">
+                Explore a stylish selection of Bearbrick collectibles, from fashion collabs to <br className="hidden md:block" /> 
+                limited-edition art pieces. Find your next statement piece today...
+            </p>
+          
+
+            <motion.div 
+                className='flex justify-center space-x-3 items-center mt-5'
+                whileHover={{ scale: 1.05 }}
+            >
+                <a href='/shop' className='bg-transparent border-zinc-100 border px-4 py-2 rounded-full hover:text-zinc-950 hover:bg-white text-zinc-100 transition duration-500'>
+                    Shop Now
+                </a> 
+                <button className='border border-zinc-100 p-2 transition duration-500 rounded-full text-zinc-100 text-2xl'>
+                    <IoIosArrowRoundForward />
+                </button>
+            </motion.div>
+        </motion.div>
 
                     <motion.div 
                         initial={{ opacity: 0, y: 40 }}
