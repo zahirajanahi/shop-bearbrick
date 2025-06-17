@@ -107,11 +107,11 @@ Swal.fire({
       product.description?.toLowerCase().includes(searchTerm.toLowerCase());
     let matchesPrice = true;
     if (filters.priceRange === 'under100') {
-      matchesPrice = product.price < 100;
+      matchesPrice = product.price < 1000;
     } else if (filters.priceRange === '100to500') {
-      matchesPrice = product.price >= 100 && product.price <= 500;
+      matchesPrice = product.price >= 1000 && product.price <= 1500;
     } else if (filters.priceRange === 'over500') {
-      matchesPrice = product.price > 500;
+      matchesPrice = product.price > 1500;
     }
     const matchesCategory = filters.category === 'all' || product.category === filters.category;
     return matchesSearch && matchesPrice && matchesCategory;
@@ -235,14 +235,14 @@ Swal.fire({
         
       </div>
       <motion.div 
-              className="relative float-end me-20"
+              className="relative float-end me-30"
               animate={{ opacity: 1, y: 0 }}
               initial={{ opacity: 0, y: 20 }}
               transition={{ delay: 0.3 }}
             >
               <button
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="flex items-center gap-2 px-4 py-3 bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 rounded-3xl text-white hover:bg-zinc-700/50 transition-all duration-300 shadow-lg"
+                className="flex items-center  gap-2 px-4 py-3 bg-zinc-800/50 backdrop-blur-sm border border-zinc-700/50 rounded-3xl text-white hover:bg-zinc-700/50 transition-all duration-300 shadow-lg"
               >
                 <SlidersHorizontal size={18} />
                 <span className="font-medium">Filters</span>
@@ -266,9 +266,9 @@ Swal.fire({
                         className="w-full p-2.5 bg-zinc-800/50 text-gray-200 border border-zinc-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
                       >
                         <option value="all">All Prices</option>
-                        <option value="under100">Under $100</option>
-                        <option value="100to500">$100 - $500</option>
-                        <option value="over500">Over $500</option>
+                        <option value="under100">Under 1000Dhs</option>
+                        <option value="100to500">1000 - 1500</option>
+                        <option value="over500">Over 1500</option>
                       </select>
                     </div>
 

@@ -93,11 +93,11 @@ export const ShopTable = () => {
       product.description?.toLowerCase().includes(searchTerm.toLowerCase());
     let matchesPrice = true;
     if (filters.priceRange === 'under100') {
-      matchesPrice = product.price < 100;
+      matchesPrice = product.price < 1000;
     } else if (filters.priceRange === '100to500') {
-      matchesPrice = product.price >= 100 && product.price <= 500;
+      matchesPrice = product.price >= 1000 && product.price <= 1500;
     } else if (filters.priceRange === 'over500') {
-      matchesPrice = product.price > 500;
+      matchesPrice = product.price > 1500;
     }
     return matchesSearch && matchesPrice;
   }).sort((a, b) => {
@@ -249,9 +249,9 @@ export const ShopTable = () => {
                                 className="w-full p-2.5 bg-zinc-800/50 text-gray-200 border border-zinc-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all"
                               >
                                 <option value="all">All Prices</option>
-                                <option value="under100">Under $100</option>
-                                <option value="100to500">$100 - $500</option>
-                                <option value="over500">Over $500</option>
+                                <option value="under100">Under 1000Dhs</option>
+                                <option value="100to500">1000 - 1500</option>
+                                <option value="over500">Over 1500</option>
                               </select>
                             </div>
         

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Plus } from 'lucide-react';
-import ProductDetailModal from './ProductDetailModal';
+import ProductDetailModal from '../components/ProductDetailModal';
+import ImageCarousel from '../components/ImageCarousel';
 
 const ProductCard = ({ product, onAddToCart }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,13 +27,12 @@ const ProductCard = ({ product, onAddToCart }) => {
         whileHover="hover"
         className="group relative bg-white/5 md:ms-0 ms-16 rounded-lg overflow-hidden border border-zinc-800 shadow-sm hover:shadow-md transition-all duration-300 w-full mb-6"
       >
-        <div className="relative aspect-square  overflow-hidden bg-gray-50">
-          <motion.img
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.7 }}
-            src={product.image_url}
+        <div className="relative aspect-square overflow-hidden bg-gray-50">
+          <ImageCarousel
+            images={product.images || [product.image_url]} // Fallback to single image if no array
             alt={product.name || product.title}
             className="w-full h-full object-cover"
+            showThumbnails={false}
           />
           
           {/* Gradient overlay on hover */}
