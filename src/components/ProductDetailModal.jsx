@@ -27,17 +27,17 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAddToCart }) => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 h-auto max-h-[90vh] overflow-auto">
               {/* Image Section - Now with Carousel */}
-              <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-auto  bg-gray-100 dark:bg-zinc-800">
+              <div className="relative w-full h-60 sm:h-80 md:h-96 lg:h-auto  bg-gray-100 dark:bg-zinc-800">
                 <ImageCarousel
                   images={product.images || [product.image_url]}
                   alt={product.title}
-                  className="w-full md:h-[65vh] h-[40vh] object-cover"
+                  className="w-full md:h-[65vh] h-[54vh] object-cover"
                   showThumbnails={true}
                 />
               </div>
 
               {/* Content Section */}
-              <div className="relative md:pt-10 pt-60 pb-40 p-10 p sm:p-6 md:p-8 flex flex-col">
+              <div className="relative md:pt-10 pt-72  p-10 p sm:p-6 md:p-8 flex flex-col">
                 <button
                   onClick={onClose}
                   className="absolute md:top-4 top-26 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"

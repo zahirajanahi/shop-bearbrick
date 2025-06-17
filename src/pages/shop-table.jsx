@@ -30,7 +30,7 @@ export const ShopTable = () => {
   const handleWhatsAppClick = () => {
     const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
-    window.open(`https://wa.me/0661553462?text=${message}`, '_blank');
+    window.open(`https://wa.me/212661553462?text=${message}`, '_blank');
   };
 
   const handleAddToCart = (product) => {

@@ -27,11 +27,11 @@ const ProductCard = ({ product, onAddToCart }) => {
         whileHover="hover"
         className="group relative bg-white/5 md:ms-0 ms-16 rounded-lg overflow-hidden border border-zinc-800 shadow-sm hover:shadow-md transition-all duration-300 w-full mb-6"
       >
-        <div className="relative aspect-square overflow-hidden bg-gray-50">
+        <div className="relative aspect-square overflow-hidden bg-gray-50 h-[40vh] sm:h-96">
           <ImageCarousel
             images={product.images || [product.image_url]} // Fallback to single image if no array
             alt={product.name || product.title}
-            className="w-full h-full object-cover"
+            className="sm:w-[15.6vw] sm:h-[40vh] h-[50vh] w-[80vw]"
             showThumbnails={false}
           />
           

@@ -43,7 +43,7 @@ const FaqPage = () => {
  
    const handleWhatsAppClick = () => {
      const message = encodeURIComponent(`Hello! I'm interested in purchasing items from your store. My cart total is ${total.toFixed(2)} MAD.`);
-     window.open(`https://wa.me/0661553462?text=${message}`, '_blank');
+     window.open(`https://wa.me/212661553462?text=${message}`, '_blank');
    };
  
 
