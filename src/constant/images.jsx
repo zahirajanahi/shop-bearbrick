@@ -2,7 +2,7 @@
 export default {
     shop:require('../assets/img/dshop.png'),
     error:require('../assets/img/error.png'),
-
+    logo:require('../assets/img/logo (2).png'),
     lnding1:require('../assets/img/herosection.jpg'),
     lnding2:require('../assets/img/responsive.jpg'),
     mobile2:require('../assets/img/mobile2.png'),

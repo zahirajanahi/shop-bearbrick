@@ -76,8 +76,8 @@ const Landing = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
             className='bg-gradient-to-r from-black via-[#280239] to-black'
-        >
-            <Helmet>
+
+        >  <Helmet>
                 <link rel="icon" type="image/png" href={Images.logo} sizes="280x280" />
             </Helmet>
 
@@ -183,7 +183,7 @@ const Landing = () => {
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.8 }}
-                        className="absolute bottom-80 ms-[38vw] text-white text-2xl md:block hidden"
+                        className="absolute bottom-12 ms-[38vw] text-white text-2xl md:block hidden"
                     >
                         <p>Explore a stylish selection of Bearbrick collectibles, from fashion collabs to <br /> limited-edition art pieces. Find your next statement piece today</p>
 
