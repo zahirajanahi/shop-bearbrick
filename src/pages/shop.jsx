@@ -10,6 +10,7 @@ import { Search, SlidersHorizontal} from 'lucide-react';
 import { LiaWhatsapp } from "react-icons/lia";
 import Swal from 'sweetalert2';
 import { Images } from "../constant";
+import KawsSuggestionSection from '../components/KawsSuggestionSection';
 
 
 
@@ -298,11 +299,9 @@ Swal.fire({
               )}
       </motion.div>
 
+      
 
-  <main className="max-w-7xl mx-auto  mb-28 mt-20 md:ms-10 me-28 ">
-
-       
-
+      <main className="max-w-7xl mx-auto  mb-28 mt-20 md:ms-10 me-28 ">
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -314,6 +313,8 @@ Swal.fire({
             />
           ))}
         </div>
+        {/* KAWS Suggestion Section */}
+      <KawsSuggestionSection />
         
         {/* Empty State */}
         {!isLoading && filteredProducts.length === 0 && (
@@ -327,7 +328,6 @@ Swal.fire({
             >
               Reset Filters
             </button>
-         =
           </div>
         )}
       </main>

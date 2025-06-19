@@ -1,5 +1,6 @@
 
 export default {
+    kaws:require('../assets/img/upscalemedia-transformed.jpeg'),
     shop:require('../assets/img/dshop.png'),
     error:require('../assets/img/error.png'),
     logo:require('../assets/img/logo (2).png'),
