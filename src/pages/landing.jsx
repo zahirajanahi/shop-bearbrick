@@ -16,6 +16,10 @@ const Landing = () => {
 
     const [openIndex, setOpenIndex] = useState(null);
       
+      const handleShop = () => {
+    // Replace with your actual KAWS site URL
+    window.open('https://www.toybrickart.com/shop', '_blank');
+  };
      const { cartItems, removeFromCart, updateQuantity } = useCart();
        const [showContactForm, setShowContactForm] = useState(false);
        const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -187,7 +191,8 @@ const Landing = () => {
                     >
                         <p>Explore a stylish selection of Bearbrick collectibles, from fashion collabs to <br /> limited-edition art pieces. Find your next statement piece today</p>
 
-                        <motion.div 
+                        <motion.button  
+                          onClick={handleShop}
                             className='flex space-x-1 items-center mt-5'
                             whileHover={{ scale: 1.05 }}
                         >
@@ -197,7 +202,7 @@ const Landing = () => {
                             <button className='border border-zinc-100 px-1 py-1  transition duration-500  rounded-full text-zinc-100 text-2xl'>
                                 <IoIosArrowRoundForward />
                             </button>
-                        </motion.div>
+                        </motion.button >
                     </motion.div>
 
 
